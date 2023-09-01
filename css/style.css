@@ -20,6 +20,7 @@ body{
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 .main {
     flex: 1 1 auto;
@@ -63,13 +64,13 @@ body{
     object-fit: cover;
     border-radius: 25px;
 }
-.slider__body_next-item{
+.slider__body_scrollLeft{
     flex: 0 0 40px;
     background-color: rgb(236, 235, 235);
     border-radius: 30px 0px 0px 30px;
 }
 
-.slider__body_next-item::after{
+.slider__body_scrollLeft::after{
     content: '';
     position: absolute;
     top: 0px;
@@ -81,7 +82,7 @@ body{
     background-color: rgb(77, 77, 77);
     border-radius: 15px;
 }
-.slider__body_next-item::before{
+.slider__body_scrollLeft::before{
     content: '';
     position: absolute;
     top: 0px;
