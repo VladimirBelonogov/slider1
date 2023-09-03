@@ -16,6 +16,7 @@ function spoller() {
     function previosSlide() {
         currentPositionslider = currentPositionslider + widthStep;
         spoller.style.right = currentPositionslider + 'px';
+        jumpItemNext();
     }
 
     function jumpItemBack() {
@@ -30,25 +31,56 @@ function spoller() {
 
         if (steps == 0) {
             let element = ((items.length - 1) + stepConvert);
-            let stepSlaider = Number(widthStep * (items.length));
 
             items[element].style.right = stepSlaider.toFixed(3) + 'px';
         }
 
         if (steps > 0) {
-            let element = ((items.length - 1) + -stepConvert);
+            let stepConvert2 = steps - 1;
+            stepConvert = stepConvert2 % items.length;
+            let element = ((items.length - 1) - ((items.length - 1) - stepConvert));
+            let coefficient = Math.floor(steps / items.length - 0.01);
 
-            items[element].style.right = stepSlaider * Math.abs(Math.floor(currentPositionslider / stepSlaider).toFixed(3)) + 'px';
+            items[element].style.right = (-stepSlaider * coefficient).toFixed(3) + 'px';
         }
-            steps = steps - 1;
+        console.log(steps);
+        steps = steps - 1;
+
         }
 
+        function jumpItemNext() {
+            let stepSlaider = Number(widthStep * (items.length));
+            let stepConvert = steps % items.length;
+            
+            if (steps < 0) {
+                let element = (stepConvert + (items.length - 1));
+                let coefficient = Math.ceil(steps / items.length);
 
+                items[element].style.right = (-stepSlaider * coefficient).toFixed(3) + 'px';
+            }
+    
+            if (steps == 0) {
+                let element = ((items.length - 1) + stepConvert);
+    
+                items[element].style.right = 0;
+            }
+    
+            if (steps > 0) {
+                let stepConvert2 = steps - 1;
+                let stepConvert = stepConvert2 % items.length;
+                let element = ((items.length - 1) + (stepConvert - (items.length - 1)));
+                let coefficient = Math.ceil(stepConvert2 / items.length + 0.01);
+                
+                items[element].style.right = (-stepSlaider * coefficient).toFixed(3) + 'px';
+            }
+
+            steps = steps + 1;
+            }
 
     function scroll() {
-    document.addEventListener("click",function (e){
+        document.querySelector('.main__slider').addEventListener("click",function (e){
         const targetElement = e.target;
-        // console.log(targetElement);
+
             if(targetElement === scrollLeft){
                 nextSlide();
             }
